@@ -1,0 +1,32 @@
+{
+  "name": "unodf",
+  "description": "unzip odf",
+  "version": "0.1.0",
+  "author": "egy186",
+  "bugs": {
+    "url": "https://github.com/egy186/unodf/issues"
+  },
+  "homepage": "https://github.com/egy186/unodf#readme",
+  "keywords": [
+    "odf",
+    "unzip"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egy186/unodf.git"
+  },
+  "scripts": {
+    "lint": "eslint *.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "js-beautify": "^1.6.2",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.0.0-rc.1",
+    "eslint-config-egy186": "github:egy186/eslint-config-egy186#v0.2.0"
+  }
+}
