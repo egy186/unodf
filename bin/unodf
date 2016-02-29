@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const fs = require('fs');
+const glob = require('glob');
+const mkdirp = require('mkdirp');
+const path = require('path');
+const pkg = require('../package.json');
+const program = require('commander');
+const unODF = require('../index');
+
+const replaceSep = p => p.replace(/\\/g, '/');
+const write = (file, data) => {
+  if (file.includes(path.sep)) {
+    mkdirp.sync(path.join(file, '..'));
+  }
+  fs.writeFileSync(file, data);
+};
+
+program
+  .version(pkg.version)
+  .usage('[options] [files...]')
+  .option('-o, --outdir [path]', 'Output directory')
+  .option('-p, --pretty', 'Prettify xml')
+  .option('-s, --silent', 'Do not output log')
+  .parse(process.argv);
+
+const consoleLog = program.silent ? () => {} : console.log; // eslint-disable-line no-console
+const outdir = path.normalize(program.outdir || '.');
+const files = program.args
+  .map(pattern => glob.sync(pattern).map(file => path.normalize(file)))
+  .reduce((p, c) => p.concat(c), []);
+const pretty = program.pretty;
+
+files.forEach(file => {
+  const base = path.join(outdir, path.basename(file, path.extname(file)));
+  mkdirp.sync(base);
+  const entries = unODF(file, pretty);
+  Object.keys(entries).forEach(key => write(path.join(base, key), entries[key]));
+  consoleLog(`${replaceSep(file)} --> ${replaceSep(base)}`);
+});

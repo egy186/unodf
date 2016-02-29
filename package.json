@@ -3,8 +3,19 @@
   "description": "unzip odf",
   "version": "0.1.0",
   "author": "egy186",
+  "bin": "./bin/unodf",
   "bugs": {
     "url": "https://github.com/egy186/unodf/issues"
+  },
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "commander": "^2.9.0",
+    "js-beautify": "^1.6.2",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.0.0-rc.1",
+    "eslint-config-egy186": "github:egy186/eslint-config-egy186#v0.2.0"
   },
   "homepage": "https://github.com/egy186/unodf#readme",
   "keywords": [
@@ -18,15 +29,6 @@
     "url": "git+https://github.com/egy186/unodf.git"
   },
   "scripts": {
-    "lint": "eslint *.js"
-  },
-  "dependencies": {
-    "adm-zip": "^0.4.7",
-    "js-beautify": "^1.6.2",
-    "mkdirp": "^0.5.1"
-  },
-  "devDependencies": {
-    "eslint": "^2.0.0-rc.1",
-    "eslint-config-egy186": "github:egy186/eslint-config-egy186#v0.2.0"
+    "lint": "eslint *.js bin/*"
   }
 }
